@@ -236,9 +236,6 @@ Once connected, use the following commands:
 
 - **Connection Problems:**  
   - Verify that the **server is running**.
-  - Use `nc` (netcat) for testing:
-    BASH
-    'nc localhost 12345'
     
 
 ---
