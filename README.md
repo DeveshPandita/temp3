@@ -15,7 +15,6 @@ This project implements a **multi-threaded chat server** in C++ using **POSIX so
 ## Table of Contents
 
 - [Features](#features)
-- [Project Structure](#project-structure)
 - [Prerequisites](#prerequisites)
 - [Compilation](#compilation)
 - [Running the Server](#running-the-server)
@@ -45,19 +44,6 @@ This project implements a **multi-threaded chat server** in C++ using **POSIX so
 
 - **Multi-threading:**  
   Each client connection is handled on a separate thread.
-
----
-
-## Project Structure
-
-- **`chat_server.cpp`**  
-  - Implements the server logic, client handling, and message transmission.
-
-- **`users.txt`**  
-  - Stores registered users in the format:
-    
-    username:password
-    
 
 ---
 
