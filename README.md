@@ -1,6 +1,3 @@
-Here is the complete README.md file, including an explanation of how the code works.
-
-markdown
 # Multi-Threaded Chat Server
 
 This project implements a **multi-threaded chat server** in C++ using **POSIX sockets and threading libraries**. The server supports **user authentication, broadcast messages, private messages, and group messaging** (including group creation, joining, and leaving).
