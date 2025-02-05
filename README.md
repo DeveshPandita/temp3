@@ -59,8 +59,8 @@ This project implements a **multi-threaded chat server** in C++ using **POSIX so
 
 To compile the chat server, run:
 
-bash
-make
+BASH
+'make'
 
 
 This command compiles the server and client executables (`server_grp` and `client_grp`).
@@ -81,8 +81,8 @@ This command compiles the server and client executables (`server_grp` and `clien
 2. **Start the Server**  
    Run the compiled server:
 
-   bash
-   ./server_grp
+   BASH
+   './server_grp'
    
 
    You should see:
@@ -94,8 +94,8 @@ This command compiles the server and client executables (`server_grp` and `clien
 3. **Connect the Client**  
    Launch the client:
 
-   bash
-   ./client_grp
+   BASH
+   './client_grp'
    
 
 ---
@@ -105,44 +105,44 @@ This command compiles the server and client executables (`server_grp` and `clien
 Once connected, use the following commands:
 
 - **Broadcast Message:**  
-  bash
-  /broadcast Hello everyone!
+  BASH
+  '/broadcast Hello everyone!'
   
   Sends "Hello everyone!" to all users.
 
 - **Private Message:**  
-  bash
-  /msg bob Hi Bob, how are you?
+  BASH
+  '/msg bob Hi Bob, how are you?'
   
   Sends a private message to `bob`.
 
 - **Create Group:**  
-  bash
-  /create_group mygroup
+  BASH
+  '/create_group mygroup'
   
   Creates a group `mygroup`.
 
 - **Join Group:**  
-  bash
-  /join_group mygroup
+  BASH
+  '/join_group mygroup'
   
   Joins the group `mygroup`.
 
 - **Leave Group:**  
-  bash
-  /leave_group mygroup
+  BASH
+  '/leave_group mygroup'
   
   Leaves the group `mygroup`.
 
 - **Send Group Message:**  
-  bash
-  /group_msg mygroup Hello group!
+  BASH
+  '/group_msg mygroup Hello group!'
   
   Sends "Hello group!" to all members.
 
 - **Exit:**  
-  bash
-  /exit
+  BASH
+  '/exit'
   
   Disconnects from the server.
 
@@ -228,8 +228,8 @@ Once connected, use the following commands:
 
 - **Compilation Errors:**  
   - Ensure **C++11 support** is enabled:
-    bash
-    g++ -std=c++11 -pthread -o server_grp chat_server.cpp
+    BASH
+    'g++ -std=c++11 -pthread -o server_grp chat_server.cpp'
     
 
 - **Authentication Issues:**  
@@ -238,8 +238,8 @@ Once connected, use the following commands:
 - **Connection Problems:**  
   - Verify that the **server is running**.
   - Use `nc` (netcat) for testing:
-    bash
-    nc localhost 12345
+    BASH
+    'nc localhost 12345'
     
 
 ---
