@@ -172,35 +172,52 @@ Once connected, use the following commands:
 
 ---
 
-## How the Code Works
+## How the Code Operates
 
-### **1. Starting the Server**
-- The `main()` function initializes the server, loads users from `users.txt`, and listens on **port 12345**.
-- When a client connects, a new thread is created for that client.
+### 1. User Authentication
 
-### **2. Handling Client Connections**
-- The `handle_client()` function authenticates the user by checking `users.txt`.
-- If authentication fails, the connection is closed.
-- On success, the client is added to the `clients` list.
+- *Initialization:*  
+  When the server starts up, it reads from the users.txt file and loads valid user credentials into a map for quick access using the load_credentials() function.
 
-### **3. Message Transmission**
-- **Broadcast Messages:**  
-  - `/broadcast <message>` is sent to all users except the sender.
+- *Login Process:*  
+  As soon as a client connects, the server prompts for a username and password. These credentials are verified against the preloaded data within the client_handler() function.
 
-- **Private Messages:**  
-  - `/msg <recipient> <message>` sends a message to a specific user.
+### 2. Client Management
 
-- **Group Messaging:**
-  - Users can create groups (`/create_group`).
-  - They can join (`/join_group`) and leave (`/leave_group`) groups.
-  - Messages sent with `/group_msg <group_name> <message>` go to all group members.
+- *Thread Handling:*  
+  Each client connection is managed in its own thread (using std::thread), which allows multiple clients to interact simultaneously without blocking the system.
 
-### **4. Multi-threading**
-- Each client is handled in a separate thread (`std::thread`).
-- `std::mutex` ensures safe access to shared resources (e.g., user lists).
+- *Tracking:*  
+  A synchronized map (referred to as socket_to_user) is maintained to keep track of active users and their corresponding sockets. This mapping is essential for efficient message routing.
 
-### **5. Client Disconnection**
-- When a user disconnects (`/exit`), their socket is closed, and they are removed from the list.
+### 3. Messaging
+
+- *Broadcast Messaging:*  
+  The /broadcast command lets users send messages to all connected clients, promoting open communication across the network. This functionality is implemented in the broadcast() function.
+
+- *Private Messaging:*  
+  With the /msg command, users can send direct, private messages to specific individuals. This feature, handled by the private_message() function, ensures that sensitive information remains confidential.
+
+- *Group Messaging and Management:*
+  - *Group Creation:*  
+    Users can form new groups with the /create_group command, which is managed by the create_group() function. This supports collaborative discussions among users.
+    
+  - *Joining Groups:*  
+    The /join_group command enables users to join existing groups, allowing them to participate in focused conversations. The process is implemented in the join_group() function.
+    
+  - *Group Communication:*  
+    Within a group, the /group_msg command is used to send messages to all members of that group. This targeted messaging is managed by the group_message() function.
+    
+  - *Leaving Groups:*  
+    Users can opt out of groups using the /leave_group command, giving them control over their group memberships. This process is handled by the leave_group() function.
+
+### 4. Connection Handling
+
+- *Disconnection:*  
+  When a client disconnects or issues the /exit command, the server cleans up by removing the user from active lists and any groups they belong to. This cleanup is managed by the handle_disconnection() function.
+
+- *Notifications:*  
+  The server may also notify other users of join and leave events, keeping everyone informed about changes in the active participant list.
 
 ---
 
