@@ -20,7 +20,7 @@ This project implements a **multi-threaded chat server** in C++ using **POSIX so
 - [Running the Server](#running-the-server)
 - [Usage Instructions](#usage-instructions)
 - [Files Description](#files-description)
-- [How the Code Works](#how-the-code-works)
+- [How the Code Operates](#how-the-code-operates)
 - [Troubleshooting](#troubleshooting)
 
 ---
