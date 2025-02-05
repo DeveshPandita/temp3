@@ -81,7 +81,7 @@ This command compiles the server and client executables (`server_grp` and `clien
    Run the compiled server:
 
    BASH
-   './server_grp'
+   '.\server_grp'
    
 
    You should see:
@@ -94,7 +94,7 @@ This command compiles the server and client executables (`server_grp` and `clien
    Launch the client:
 
    BASH
-   './client_grp'
+   '.\client_grp'
    
 
 ---
