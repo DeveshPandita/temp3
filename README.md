@@ -49,9 +49,8 @@ This project implements a **multi-threaded chat server** in C++ using **sockets 
 
 ## Prerequisites
 
-- **Operating System:** Linux or any POSIX-compliant system.
 - **Compiler:** A C++ compiler supporting **C++11 or higher** (e.g., `g++`).
-- **Libraries:** Standard C++ libraries, POSIX sockets, and threading libraries.
+- **Libraries:** Standard C++ libraries, sockets, and threading libraries.
 
 ---
 
