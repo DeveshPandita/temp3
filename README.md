@@ -149,7 +149,7 @@ Once connected, use the following commands:
 
 ## Files Description
 
-- **`chat_server.cpp`**
+- **`server_grp.cpp`**
   - **Main Function (`main`)**
     - Loads user credentials from `users.txt`.
     - Binds the server to **port 12345**.
