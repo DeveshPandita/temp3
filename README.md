@@ -4,6 +4,14 @@ This project implements a multi-threaded chat server in C++ using POSIX sockets 
 
 ---
 
+## Group Members
+
+- Suvrat Pal (211089)
+- Devesh Pandita (210330)
+- Om Kothawade (210682)
+
+---
+
 ## Table of Contents
 
 - [Features](#features)
