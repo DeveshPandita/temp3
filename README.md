@@ -72,8 +72,8 @@ This command compiles the server and client executables (`server_grp` and `clien
    Ensure the `users.txt` file exists in the same directory with credentials:
 
    
-   alice:password123 \\
-   bob:qwerty456 \\
+   alice:password123  
+   bob:qwerty456  
    charlie:secure789
    
 
