@@ -131,13 +131,13 @@ Once connected, use the following commands:
   BASH
   '/leave_group mygroup'
   
-  Leaves the group `mygroup`.
+  User leaves the group `mygroup`.
 
 - **Send Group Message:**  
   BASH
   '/group_msg mygroup Hello group!'
   
-  Sends "Hello group!" to all members.
+  Sends "Hello group!" to all members of group `mygroup`.
 
 - **Exit:**  
   BASH
