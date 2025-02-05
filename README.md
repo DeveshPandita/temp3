@@ -1,14 +1,17 @@
+Here is the complete README.md file, including an explanation of how the code works.
+
+markdown
 # Multi-Threaded Chat Server
 
-This project implements a multi-threaded chat server in C++ using POSIX sockets and standard threading libraries. The server supports user authentication, broadcast messages, private messages, and group messaging (with group creation, joining, and leaving).
+This project implements a **multi-threaded chat server** in C++ using **POSIX sockets and threading libraries**. The server supports **user authentication, broadcast messages, private messages, and group messaging** (including group creation, joining, and leaving).
 
 ---
 
 ## Group Members
 
-- Suvrat Pal (211089)
-- Devesh Pandita (210330)
-- Om Kothawade (210682)
+- **Suvrat Pal (211089)**
+- **Devesh Pandita (210330)**
+- **Om Kothawade (210682)**
 
 ---
 
@@ -21,6 +24,7 @@ This project implements a multi-threaded chat server in C++ using POSIX sockets 
 - [Running the Server](#running-the-server)
 - [Usage Instructions](#usage-instructions)
 - [Files Description](#files-description)
+- [How the Code Works](#how-the-code-works)
 - [Troubleshooting](#troubleshooting)
 
 ---
@@ -28,196 +32,214 @@ This project implements a multi-threaded chat server in C++ using POSIX sockets 
 ## Features
 
 - **User Authentication:**  
-  Clients must log in using a valid username and password. Credentials are stored in a `users.txt` file in the format `username:password`.
+  Clients must log in using a **valid username and password** stored in the `users.txt` file.
 
 - **Broadcast Messaging:**  
-  The command `/broadcast <message>` sends a message to all connected clients except the sender.
+  `/broadcast <message>` sends a message to all connected users.
 
 - **Private Messaging:**  
-  The command `/msg <recipient> <message>` sends a private message to the specified user.
+  `/msg <recipient> <message>` sends a private message to a specific user.
 
-- **Group Management & Messaging:**  
-  - **Create Group:** `/create_group <group_name>` creates a new group with the creator as the first member.
-  - **Join Group:** `/join_group <group_name>` adds the client to an existing group.
-  - **Leave Group:** `/leave_group <group_name>` removes the client from a group.
-  - **Group Message:** `/group_msg <group_name> <message>` sends a message to all members of the specified group (except the sender).
+- **Group Messaging & Management:**  
+  - `/create_group <group_name>` creates a new group.
+  - `/join_group <group_name>` adds the user to a group.
+  - `/leave_group <group_name>` removes the user from a group.
+  - `/group_msg <group_name> <message>` sends a message to all group members.
 
 - **Multi-threading:**  
-  Each client connection is handled on a separate thread, allowing multiple clients to communicate simultaneously.
+  Each client connection is handled on a separate thread.
 
 ---
 
 ## Project Structure
 
-- **chat_server.cpp**  
-  Contains the full source code for the chat server. It includes:
-  - Socket creation and binding to a port.
-  - Loading user credentials from `users.txt`.
-  - Accepting client connections and handling each in a separate thread.
-  - Implementations of messaging functions (broadcast, private, and group messaging).
+- **`chat_server.cpp`**  
+  - Implements the server logic, client handling, and message transmission.
 
-- **users.txt**  
-  A text file that stores user credentials. Each line should be in the format:  
-  
-  username:password
-  
+- **`users.txt`**  
+  - Stores registered users in the format:
+    
+    username:password
+    
 
 ---
 
 ## Prerequisites
 
-- **Operating System:**  
-  Linux or any POSIX-compliant system.
-
-- **Compiler:**  
-  A C++ compiler that supports C++11 or higher (e.g., `g++`).
-
-- **Libraries:**  
-  Standard C++ libraries, POSIX sockets, and threading libraries (no third-party libraries are required).
+- **Operating System:** Linux or any POSIX-compliant system.
+- **Compiler:** A C++ compiler supporting **C++11 or higher** (e.g., `g++`).
+- **Libraries:** Standard C++ libraries, POSIX sockets, and threading libraries.
 
 ---
 
 ## Compilation
 
-To compile the chat server, open a terminal in the project directory and run:
+To compile the chat server, run:
 
 bash
-g++ -std=c++11 -pthread -o chat_server chat_server.cpp
+make
 
 
-- `-std=c++11` enables C++11 features.
-- `-pthread` links the POSIX threading library.
+This command compiles the server and client executables (`server_grp` and `client_grp`).
 
 ---
 
 ## Running the Server
 
-1. **Prepare the `users.txt` File:**
-
-   Create a file named `users.txt` in the same directory as the executable. Each line should contain a username and password separated by a colon. For example:
+1. **Prepare the `users.txt` File**  
+   Ensure the `users.txt` file exists in the same directory with credentials:
 
    
    alice:password123
    bob:qwerty456
    charlie:secure789
-
-2. **Start the Server:**
-
-   Run the compiled server executable:
-
-   bash
-   ./chat_server
    
 
-   The server will bind to port `12345` (as defined in the code) and start listening for incoming connections. You should see an output message like:
+2. **Start the Server**  
+   Run the compiled server:
+
+   bash
+   ./server_grp
+   
+
+   You should see:
 
    
    Server started on port 12345...
    
 
-3. **Connect a Client:**
-
-   Use any TCP client (such as `telnet` or `nc`) to connect to the server. For example, using `telnet`:
-
-   bash
-   telnet localhost 12345
-   
-
-   Or using `nc` (netcat):
+3. **Connect the Client**  
+   Launch the client:
 
    bash
-   nc localhost 12345
+   ./client_grp
    
 
 ---
 
 ## Usage Instructions
 
-Once connected, follow these steps:
+Once connected, use the following commands:
 
-1. **Authentication:**
-   - **Enter username:** When prompted, type your username (must exist in `users.txt`).
-   - **Enter password:** When prompted, type the corresponding password.
-   - If authentication fails, the server will close your connection.
+- **Broadcast Message:**  
+  bash
+  /broadcast Hello everyone!
+  
+  Sends "Hello everyone!" to all users.
 
-2. **Chat Commands:**
+- **Private Message:**  
+  bash
+  /msg bob Hi Bob, how are you?
+  
+  Sends a private message to `bob`.
 
-   - **Broadcast Message:**  
-     bash
-     /broadcast Hello everyone!
-     
-     Sends "Hello everyone!" to all connected users (except yourself).
+- **Create Group:**  
+  bash
+  /create_group mygroup
+  
+  Creates a group `mygroup`.
 
-   - **Private Message:**  
-     bash
-     /msg bob Hi Bob, how are you?
-     
-     Sends a private message to the user `bob`.
+- **Join Group:**  
+  bash
+  /join_group mygroup
+  
+  Joins the group `mygroup`.
 
-   - **Create Group:**  
-     bash
-     /create_group mygroup
-     
-     Creates a new group named `mygroup` with you as its first member.
+- **Leave Group:**  
+  bash
+  /leave_group mygroup
+  
+  Leaves the group `mygroup`.
 
-   - **Join Group:**  
-     bash
-     /join_group mygroup
-     
-     Joins the existing group `mygroup`.
+- **Send Group Message:**  
+  bash
+  /group_msg mygroup Hello group!
+  
+  Sends "Hello group!" to all members.
 
-   - **Leave Group:**  
-     bash
-     /leave_group mygroup
-     
-     Leaves the group `mygroup`.
-
-   - **Group Message:**  
-     bash
-     /group_msg mygroup Hello group!
-     
-     Sends a message to all members of the group `mygroup` (except yourself).
-
-   - **Exit:**  
-     bash
-     /exit
-     
-     Disconnects from the chat server.
+- **Exit:**  
+  bash
+  /exit
+  
+  Disconnects from the server.
 
 ---
 
 ## Files Description
 
-- **chat_server.cpp:**  
-  - **Main Function:**  
-    Initializes the server, loads user credentials from `users.txt`, binds the server to a port, listens for connections, and spawns a new thread to handle each client.
-  
-  - **handle_client():**  
-    Authenticates the user, registers the client, processes incoming commands, and handles client disconnection.
-  
-  - **Messaging Functions:**  
-    - `send_message()`: Sends a message to a specific client.
-    - `broadcast_message()`: Sends a message to all clients except the sender.
-    - `send_private_message()`: Sends a private message to a specified user.
-    - `send_group_message()`: Sends a message to all members of a specified group.
+- **`chat_server.cpp`**
+  - **Main Function (`main`)**
+    - Loads user credentials from `users.txt`.
+    - Binds the server to **port 12345**.
+    - Listens for client connections and spawns a new thread for each client.
 
-- **users.txt:**  
-  Stores user credentials. Each line should have the format `username:password`.
+  - **`handle_client()`**
+    - Authenticates the user.
+    - Registers the client.
+    - Processes chat commands.
+
+  - **Messaging Functions:**
+    - `send_message()`: Sends a message to a specific client.
+    - `broadcast_message()`: Sends a message to all users.
+    - `send_private_message()`: Sends a private message to a user.
+    - `send_group_message()`: Sends a message to a group.
+
+- **`users.txt`**  
+  - Stores registered user credentials.
+
+---
+
+## How the Code Works
+
+### **1. Starting the Server**
+- The `main()` function initializes the server, loads users from `users.txt`, and listens on **port 12345**.
+- When a client connects, a new thread is created for that client.
+
+### **2. Handling Client Connections**
+- The `handle_client()` function authenticates the user by checking `users.txt`.
+- If authentication fails, the connection is closed.
+- On success, the client is added to the `clients` list.
+
+### **3. Message Transmission**
+- **Broadcast Messages:**  
+  - `/broadcast <message>` is sent to all users except the sender.
+
+- **Private Messages:**  
+  - `/msg <recipient> <message>` sends a message to a specific user.
+
+- **Group Messaging:**
+  - Users can create groups (`/create_group`).
+  - They can join (`/join_group`) and leave (`/leave_group`) groups.
+  - Messages sent with `/group_msg <group_name> <message>` go to all group members.
+
+### **4. Multi-threading**
+- Each client is handled in a separate thread (`std::thread`).
+- `std::mutex` ensures safe access to shared resources (e.g., user lists).
+
+### **5. Client Disconnection**
+- When a user disconnects (`/exit`), their socket is closed, and they are removed from the list.
 
 ---
 
 ## Troubleshooting
 
 - **Port Conflicts:**  
-  Ensure that port `12345` is not already in use and is allowed through your firewall.
+  Ensure that **port 12345** is available.
 
 - **Compilation Errors:**  
-  Verify that your compiler supports C++11 and that all required header files (such as `<arpa/inet.h>`, `<unistd.h>`) are available.
+  - Ensure **C++11 support** is enabled:
+    bash
+    g++ -std=c++11 -pthread -o server_grp chat_server.cpp
+    
 
 - **Authentication Issues:**  
-  Ensure that the `users.txt` file exists in the same directory as the executable and that the credentials are correctly formatted.
+  - Check `users.txt` for valid usernames/passwords.
 
 - **Connection Problems:**  
-  If clients cannot connect, confirm that the server is running and that you are using the correct port and IP address.
+  - Verify that the **server is running**.
+  - Use `nc` (netcat) for testing:
+    bash
+    nc localhost 12345
+    
 
 ---
